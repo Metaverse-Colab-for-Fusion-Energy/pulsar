@@ -44,7 +44,11 @@ log = logging.getLogger(__name__)
 
 REQUIRES_DAEMONIZE_MESSAGE = "Attempted to use Pulsar in daemon mode, but daemonize is unavailable."
 
-PULSAR_ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if "PULSAR_ROOT_DIR" in os.environ:
+    PULSAR_ROOT_DIR = os.path.abspath(os.environ["PULSAR_ROOT_DIR"])
+else:
+    PULSAR_ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
 if "PULSAR_CONFIG_DIR" in os.environ:
     PULSAR_CONFIG_DIR = os.path.abspath(os.environ["PULSAR_CONFIG_DIR"])
 else:
